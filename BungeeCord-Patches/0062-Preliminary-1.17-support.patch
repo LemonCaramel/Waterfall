@@ -1,4 +1,4 @@
-From 0c68a5664f512fcdc5a14be73f81657d3fb52269 Mon Sep 17 00:00:00 2001
+From 8bfb3fcb8f74105078e6f47605650f68745cd561 Mon Sep 17 00:00:00 2001
 From: "Markus L. (FivePB)" <admin@fivepb.me>
 Date: Mon, 9 Nov 2020 09:47:50 +0100
 Subject: [PATCH] Preliminary 1.17 support
@@ -26,7 +26,7 @@ index d2a11a82..2a60769d 100644
              );
              TO_CLIENT.registerPacket(
 diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
-index 8c3a78d6..d40a2a07 100644
+index 8c3a78d6..3b3a9d4a 100644
 --- a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 +++ b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 @@ -34,7 +34,8 @@ public class ProtocolConstants
@@ -35,7 +35,7 @@ index 8c3a78d6..d40a2a07 100644
      public static final int MINECRAFT_1_16_4 = 754;
 -    public static final int MINECRAFT_1_17 = 1073741852;
 +    public static final int MINECRAFT_1_17 = 755; // Waterfall
-+    public static final int SNAPSHOT_PROTOCOL = 1073741853; // Waterfall
++    public static final int SNAPSHOT_PROTOCOL = 1073741854; // Waterfall
      public static final List<String> SUPPORTED_VERSIONS;
      public static final List<Integer> SUPPORTED_VERSION_IDS;
  
@@ -53,6 +53,18 @@ index 8c3a78d6..d40a2a07 100644
          }
  
          SUPPORTED_VERSIONS = supportedVersions.build();
+diff --git a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java
+index 13456b34..f3032e7a 100644
+--- a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java
++++ b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java
+@@ -75,6 +75,7 @@ public abstract class EntityMap
+             case ProtocolConstants.MINECRAFT_1_16_4:
+                 return EntityMap_1_16_2.INSTANCE_1_16_2;
+             case ProtocolConstants.MINECRAFT_1_17:
++            case ProtocolConstants.SNAPSHOT_PROTOCOL: // Waterfall
+                 return EntityMap_1_16_2.INSTANCE_1_17;
+         }
+         throw new RuntimeException( "Version " + version + " has no entity map" );
 -- 
-2.28.0.windows.1
+2.31.1
 
