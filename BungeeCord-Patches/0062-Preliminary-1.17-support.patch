@@ -1,4 +1,4 @@
-From 3b23206dff8f07b0f497d0ffa5584c892ab6def5 Mon Sep 17 00:00:00 2001
+From c65534454235d2f76272d59c154cf4f892872f2f Mon Sep 17 00:00:00 2001
 From: LemonCaramel <admin@caramel.moe>
 Date: Wed, 2 Jun 2021 02:29:14 +0900
 Subject: [PATCH] Preliminary 1.17 support
@@ -31,7 +31,7 @@ index d2a11a82..518a6b28 100644
              );
              TO_CLIENT.registerPacket(
 diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
-index 8c3a78d6..93d03742 100644
+index 8c3a78d6..f1dc4eaf 100644
 --- a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 +++ b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 @@ -34,7 +34,8 @@ public class ProtocolConstants
@@ -40,7 +40,7 @@ index 8c3a78d6..93d03742 100644
      public static final int MINECRAFT_1_16_4 = 754;
 -    public static final int MINECRAFT_1_17 = 1073741852;
 +    public static final int MINECRAFT_1_17 = 755; // Waterfall
-+    public static final int SNAPSHOT_PROTOCOL = (1 << 30) | 31; // Waterfall
++    public static final int SNAPSHOT_PROTOCOL = (1 << 30) | 32; // Waterfall
      public static final List<String> SUPPORTED_VERSIONS;
      public static final List<Integer> SUPPORTED_VERSION_IDS;
  
