@@ -1,7 +1,7 @@
-From 71021a9a588e07ca11e0f570c21e189deaf8157a Mon Sep 17 00:00:00 2001
+From 0beac982bc3d590d3680ea5355e24de23a71d8b5 Mon Sep 17 00:00:00 2001
 From: LemonCaramel <admin@caramel.moe>
 Date: Wed, 2 Jun 2021 02:29:14 +0900
-Subject: [PATCH] Preliminary 1.17 support
+Subject: [PATCH] Preliminary Snapshot support
 
 
 diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/Protocol.java b/protocol/src/main/java/net/md_5/bungee/protocol/Protocol.java
@@ -31,42 +31,47 @@ index d2a11a82..518a6b28 100644
              );
              TO_CLIENT.registerPacket(
 diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
-index 8c3a78d6..8f79ca66 100644
+index 8c021273..e4bd4b52 100644
 --- a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 +++ b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
-@@ -34,7 +34,8 @@ public class ProtocolConstants
-     public static final int MINECRAFT_1_16_2 = 751;
+@@ -6,6 +6,7 @@ import java.util.List;
+ public class ProtocolConstants
+ {
+ 
++    private static final boolean SNAPSHOT_SUPPORT = Boolean.getBoolean( "net.md_5.bungee.protocol.snapshot" );
+     public static final int MINECRAFT_1_8 = 47;
+     public static final int MINECRAFT_1_9 = 107;
+     public static final int MINECRAFT_1_9_1 = 108;
+@@ -34,6 +35,7 @@ public class ProtocolConstants
      public static final int MINECRAFT_1_16_3 = 753;
      public static final int MINECRAFT_1_16_4 = 754;
--    public static final int MINECRAFT_1_17 = 1073741852;
-+    public static final int MINECRAFT_1_17 = 755; // Waterfall
-+    public static final int SNAPSHOT_PROTOCOL = (1 << 30) | 33; // Waterfall
+     public static final int MINECRAFT_1_17 = 755;
++    public static final int SNAPSHOT_PROTOCOL = (1 << 30) | 34; // Waterfall
      public static final List<String> SUPPORTED_VERSIONS;
      public static final List<Integer> SUPPORTED_VERSION_IDS;
  
-@@ -84,7 +85,12 @@ public class ProtocolConstants
-         if ( SNAPSHOT_SUPPORT )
-         {
-             supportedVersions.add( "1.17.x" );
--            supportedVersionIds.add( ProtocolConstants.MINECRAFT_1_17 );
-+            // Waterfall start
-+            supportedVersionIds.add(
-+                    ProtocolConstants.MINECRAFT_1_17,
-+                    ProtocolConstants.SNAPSHOT_PROTOCOL
-+            );
-+            // Waterfall end
-         }
+@@ -82,6 +84,12 @@ public class ProtocolConstants
+                 ProtocolConstants.MINECRAFT_1_17
+         );
  
++        if ( SNAPSHOT_SUPPORT )
++        {
++            supportedVersions.add( "Snapshot" );
++            supportedVersionIds.add( ProtocolConstants.SNAPSHOT_PROTOCOL );
++        }
++
          SUPPORTED_VERSIONS = supportedVersions.build();
+         SUPPORTED_VERSION_IDS = supportedVersionIds.build();
+     }
 diff --git a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java
-index 13456b34..3ba62fa6 100644
+index 13456b34..f3032e7a 100644
 --- a/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java
 +++ b/proxy/src/main/java/net/md_5/bungee/entitymap/EntityMap.java
 @@ -75,6 +75,7 @@ public abstract class EntityMap
              case ProtocolConstants.MINECRAFT_1_16_4:
                  return EntityMap_1_16_2.INSTANCE_1_16_2;
              case ProtocolConstants.MINECRAFT_1_17:
-+            case ProtocolConstants.SNAPSHOT_PROTOCOL:
++            case ProtocolConstants.SNAPSHOT_PROTOCOL: // Waterfall
                  return EntityMap_1_16_2.INSTANCE_1_17;
          }
          throw new RuntimeException( "Version " + version + " has no entity map" );
