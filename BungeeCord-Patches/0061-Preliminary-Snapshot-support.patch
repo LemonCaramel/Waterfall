@@ -4,32 +4,6 @@ Date: Wed, 2 Jun 2021 02:29:14 +0900
 Subject: [PATCH] Preliminary Snapshot support
 
 
-diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/Protocol.java b/protocol/src/main/java/net/md_5/bungee/protocol/Protocol.java
-index d2a11a82..518a6b28 100644
---- a/protocol/src/main/java/net/md_5/bungee/protocol/Protocol.java
-+++ b/protocol/src/main/java/net/md_5/bungee/protocol/Protocol.java
-@@ -244,14 +244,19 @@ public enum Protocol
-                     map( ProtocolConstants.MINECRAFT_1_16, 0x4F ),
-                     map( ProtocolConstants.MINECRAFT_1_17, 0x59 )
-             );
--            TO_CLIENT.registerPacket( ClearTitles.class,
-+            TO_CLIENT.registerPacket(
-+                    ClearTitles.class,
-+                    ClearTitles::new, // Waterfall - speed up packet construction
-                     map( ProtocolConstants.MINECRAFT_1_17, 0x10 )
-             );
-             TO_CLIENT.registerPacket(
-                     Subtitle.class,
-+                    Subtitle::new, // Waterfall - speed up packet construction
-                     map( ProtocolConstants.MINECRAFT_1_17, 0x57 )
-             );
--            TO_CLIENT.registerPacket( TitleTimes.class,
-+            TO_CLIENT.registerPacket(
-+                    TitleTimes.class,
-+                    TitleTimes::new, // Waterfall - speed up packet construction
-                     map( ProtocolConstants.MINECRAFT_1_17, 0x5A )
-             );
-             TO_CLIENT.registerPacket(
 diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 index 8c021273..d8302afd 100644
 --- a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
