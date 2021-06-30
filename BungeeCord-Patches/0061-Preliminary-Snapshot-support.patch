@@ -1,18 +1,18 @@
-From 631b52fb7738ec6f4b7e1b4089f06c824238be33 Mon Sep 17 00:00:00 2001
+From b3149e5fc9dc58336c90d8d9290dc806a977da23 Mon Sep 17 00:00:00 2001
 From: LemonCaramel <admin@caramel.moe>
 Date: Wed, 2 Jun 2021 02:29:14 +0900
 Subject: [PATCH] Preliminary Snapshot support
 
 
 diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
-index e208209e..588c3d8d 100644
+index e208209e..e7408133 100644
 --- a/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 +++ b/protocol/src/main/java/net/md_5/bungee/protocol/ProtocolConstants.java
 @@ -35,6 +35,7 @@ public class ProtocolConstants
      public static final int MINECRAFT_1_16_3 = 753;
      public static final int MINECRAFT_1_16_4 = 754;
      public static final int MINECRAFT_1_17 = 755;
-+    public static final int SNAPSHOT_PROTOCOL = (1 << 30) | 36; // Waterfall
++    public static final int SNAPSHOT_PROTOCOL = (1 << 30) | 37; // Waterfall
      public static final List<String> SUPPORTED_VERSIONS;
      public static final List<Integer> SUPPORTED_VERSION_IDS;
  
